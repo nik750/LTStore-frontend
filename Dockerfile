@@ -9,6 +9,6 @@
 # Stage 2: Serve the app with Nginx
 FROM nginx:alpine
 WORKDIR /app
-COPY --from=builder /app/dist/storekeeper-app /usr/share/nginx/html
+COPY dist/storekeeper-app /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
