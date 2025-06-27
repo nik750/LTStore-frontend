@@ -1,0 +1,12 @@
+.app-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #241b7c;
+}
+
+.main-container {
+  padding: 24px;
+  max-width: 1024px;
+  margin: 0 auto;
+}

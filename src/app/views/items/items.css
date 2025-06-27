@@ -1,0 +1,44 @@
+.container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto; /* 👈 Center content horizontally */
+}
+
+.form-card,
+.inventory-card {
+  padding: 24px;
+  border-radius: 8px; /* 👈 Softer edges */
+}
+
+.form-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+mat-form-field {
+  flex: 1 1 280px;
+  min-width: 200px;
+}
+
+.inventory-table {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 12px;
+  gap: 16px; /* 👈 Adds space between title and search */
+}
+
+.search-field {
+  min-width: 200px;
+  margin-left: auto; /* Optional: push it to the right */
+}
+
