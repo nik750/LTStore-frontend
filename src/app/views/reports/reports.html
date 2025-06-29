@@ -1,1 +1,55 @@
-<p>reports works!</p>
+<mat-card>
+  <h2>Daily Report ({{ today | date:'fullDate' }})</h2>
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let sale of dailySales">
+        <tr *ngFor="let item of sale.items">
+          <td>{{ item.name }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ (item.price * item.quantity) | currency }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div class="report-summary">
+    <strong>Daily Total: {{ dailyTotal | currency }}</strong>
+  </div>
+</mat-card>
+
+<mat-card>
+  <h2>Month-End Report ({{ today | date:'MMMM yyyy' }})</h2>
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let sale of monthSales">
+        <tr *ngFor="let item of sale.items">
+          <td>{{ sale.date | date:'shortDate' }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ (item.price * item.quantity) | currency }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div class="report-summary">
+    <strong>Month Total: {{ monthTotal | currency }}</strong>
+  </div>
+</mat-card>

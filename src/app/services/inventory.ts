@@ -7,10 +7,11 @@ import { Item } from '../models/item.model';
 })
 export class InventoryService {
   private items: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>([
-    // Optional: Initial demo data
-    { id: 1, name: 'Notebook', quantity: 20, price: 2.5 },
-    { id: 2, name: 'Pen', quantity: 50, price: 1.0 },
-    { id: 3, name: 'Marker', quantity: 50, price: 10.0 }
+    { id: 1, name: 'Bread', quantity: 30, price: 2.0 },
+    { id: 2, name: 'Croissant', quantity: 25, price: 3.5 },
+    { id: 3, name: 'Muffin', quantity: 40, price: 2.5 },
+    { id: 4, name: 'Bagel', quantity: 20, price: 2.2 },
+    { id: 5, name: 'Donut', quantity: 50, price: 1.8 }
   ]);
 
   constructor() {}

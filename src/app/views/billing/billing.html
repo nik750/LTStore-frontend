@@ -14,19 +14,20 @@
         <tr *ngFor="let group of billItems; let i = index">
           <td>
             <mat-form-field appearance="fill" style="width: 150px;">
-              <mat-select [formControl]="group.get('id')" (selectionChange)="onItemSelect(i)">
+              <mat-select [formControl]="getIdControl(group)" (selectionChange)="onItemSelect(i)">
                 <mat-option *ngFor="let item of items" [value]="item.id">{{ item.name }}</mat-option>
               </mat-select>
             </mat-form-field>
           </td>
           <td>{{ group.value.price | currency }}</td>
           <td>
-            <input matInput type="number" min="0" [formControl]="group.get('quantity')" style="width:60px;" />
+            <input matInput type="number" min="0" [formControl]="getQuantityControl(group)" style="width:60px;" />
           </td>
           <td>{{ group.value.quantity * group.value.price | currency }}</td>
         </tr>
       </tbody>
     </table>
+    <button mat-stroked-button color="primary" type="button" (click)="addBillItem()">Add Item</button>
     <div class="bill-summary">
       <strong>Grand Total: {{ total | currency }}</strong>
     </div>

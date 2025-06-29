@@ -7,6 +7,6 @@ import { Billing } from './views/billing/billing';
 export const routes: Routes = [
     { path: '', component: Dashboard },
     { path: 'items', component: Items },
-    { path: 'reports', component: Reports }
+    { path: 'reports', component: Reports },
     { path: 'bill', component: Billing } // Assuming Billing component is imported from the correct path
 ];
