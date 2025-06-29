@@ -1,0 +1,14 @@
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+.bill-table th, .bill-table td {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 8px;
+  text-align: left;
+}
+.bill-summary {
+  margin: 16px 0;
+  font-size: 1.2em;
+}

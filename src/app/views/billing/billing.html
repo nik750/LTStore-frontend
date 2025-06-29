@@ -1,0 +1,35 @@
+<mat-card>
+  <h2>Billing</h2>
+  <form [formGroup]="billForm">
+    <table class="bill-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of billItems; let i = index">
+          <td>
+            <mat-form-field appearance="fill" style="width: 150px;">
+              <mat-select [formControl]="group.get('id')" (selectionChange)="onItemSelect(i)">
+                <mat-option *ngFor="let item of items" [value]="item.id">{{ item.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>{{ group.value.price | currency }}</td>
+          <td>
+            <input matInput type="number" min="0" [formControl]="group.get('quantity')" style="width:60px;" />
+          </td>
+          <td>{{ group.value.quantity * group.value.price | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="bill-summary">
+      <strong>Grand Total: {{ total | currency }}</strong>
+    </div>
+    <button mat-raised-button color="primary" type="button" (click)="finalizeBill()">Finalize Bill</button>
+  </form>
+</mat-card>
