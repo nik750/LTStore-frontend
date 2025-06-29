@@ -1,39 +1,27 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Item } from '../models/item.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class InventoryService {
-  private items: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>([
-    { id: 1, name: 'Bread', quantity: 30, price: 2.0 },
-    { id: 2, name: 'Croissant', quantity: 25, price: 3.5 },
-    { id: 3, name: 'Muffin', quantity: 40, price: 2.5 },
-    { id: 4, name: 'Bagel', quantity: 20, price: 2.2 },
-    { id: 5, name: 'Donut', quantity: 50, price: 1.8 }
-  ]);
+  private API_URL = 'http://ec2-65-2-9-170.ap-south-1.compute.amazonaws.com:3000';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getItems(): Observable<Item[]> {
-    return this.items.asObservable();
+    return this.http.get<Item[]>(`${this.API_URL}/inventory`);
   }
 
-  addItem(item: Item): void {
-    const current = this.items.value;
-    this.items.next([...current, item]);
+  addItem(item: Item): Observable<Item> {
+    return this.http.post<Item>(`${this.API_URL}/inventory`, item);
   }
 
-  updateItem(updatedItem: Item): void {
-    const updated = this.items.value.map(item =>
-      item.id === updatedItem.id ? updatedItem : item
-    );
-    this.items.next(updated);
+  updateItem(item: Item): Observable<Item> {
+    return this.http.put<Item>(`${this.API_URL}/inventory/${item.id}`, item);
   }
 
-  deleteItem(id: number): void {
-    const filtered = this.items.value.filter(item => item.id !== id);
-    this.items.next(filtered);
+  deleteItem(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/inventory/${id}`);
   }
 }

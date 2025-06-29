@@ -23,15 +23,14 @@ import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule],
   templateUrl: './items.html',
   styleUrl: './items.css'
 })
 export class Items implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   items: Item[] = [];
-  displayedColumns = ['name', 'quantity', 'price'];
+  displayedColumns = ['product', 'quantity', 'price'];
 
   dataSource!: MatTableDataSource<Item>;
 
@@ -46,13 +45,21 @@ export class Items implements AfterViewInit {
 
   }
   submit() {
-    console.log('Submitted data:', this.productForm.value);
+    const newItem: Item = {
+      id: (Date.now()).toString(),
+      storeId: 'A',
+      product: this.productForm.value.name,
+      quantity: this.productForm.value.quantity,
+      price: this.productForm.value.price
+    };
+    this.inventoryService.addItem(newItem);
+    this.productForm.reset({ name: '', quantity: 0, price: 0 });
   }
 
   ngOnInit(): void {
     this.inventoryService.getItems().subscribe((data) => {
       this.items = data;
-      this.dataSource = new MatTableDataSource<Item>(this.items)
+      this.dataSource = new MatTableDataSource<Item>(this.items);
       this.dataSource.paginator = this.paginator;
     });
   }

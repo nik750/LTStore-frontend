@@ -38,12 +38,12 @@ export class Billing implements OnInit {
   setBillItems() {
     const billItems = this.billForm.get('billItems') as FormArray;
     billItems.clear();
-    // Start with one empty row
     billItems.push(this.fb.group({
       id: [null],
-      name: [''],
-      price: [0],
-      quantity: [0]
+      storeId: ['A'],
+      product: [''],
+      quantity: [0],
+      price: [0]
     }));
   }
 
@@ -54,13 +54,15 @@ export class Billing implements OnInit {
     const selectedItem = this.items.find(item => item.id === selectedId);
     if (selectedItem) {
       group.patchValue({
-        name: selectedItem.name,
-        price: selectedItem.price
+        product: selectedItem.product,
+        price: selectedItem.price,
+        storeId: selectedItem.storeId
       });
     } else {
       group.patchValue({
-        name: '',
-        price: 0
+        product: '',
+        price: 0,
+        storeId: 'A'
       });
     }
   }
@@ -145,9 +147,10 @@ export class Billing implements OnInit {
     const billItems = this.billForm.get('billItems') as FormArray;
     billItems.push(this.fb.group({
       id: [null],
-      name: [''],
-      price: [0],
-      quantity: [0]
+      storeId: ['A'],
+      product: [''],
+      quantity: [0],
+      price: [0]
     }));
   }
 }

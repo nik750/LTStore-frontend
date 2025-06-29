@@ -15,7 +15,7 @@
           <td>
             <mat-form-field appearance="fill" style="width: 150px;">
               <mat-select [formControl]="getIdControl(group)" (selectionChange)="onItemSelect(i)">
-                <mat-option *ngFor="let item of items" [value]="item.id">{{ item.name }}</mat-option>
+                <mat-option *ngFor="let item of items" [value]="item.id">{{ item.product }}</mat-option>
               </mat-select>
             </mat-form-field>
           </td>

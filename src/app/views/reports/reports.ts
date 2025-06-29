@@ -22,13 +22,17 @@ export class Reports implements OnInit {
   constructor(private salesService: SalesService) {}
 
   ngOnInit() {
-    this.loadReports();
-  }
-
-  loadReports() {
-    this.dailySales = this.salesService.getSalesForDate(this.today);
-    this.monthSales = this.salesService.getSalesForMonth(this.month, this.year);
-    this.dailyTotal = this.salesService.getTotalExpenseForDate(this.today);
-    this.monthTotal = this.salesService.getTotalExpenseForMonth(this.month, this.year);
+    this.salesService.getSales().subscribe((sales) => {
+      this.dailySales = sales.filter(sale => {
+        const saleDate = new Date(sale.date);
+        return saleDate.toDateString() === this.today.toDateString();
+      });
+      this.monthSales = sales.filter(sale => {
+        const saleDate = new Date(sale.date);
+        return saleDate.getMonth() === this.month && saleDate.getFullYear() === this.year;
+      });
+      this.dailyTotal = this.dailySales.reduce((sum, sale) => sum + sale.total, 0);
+      this.monthTotal = this.monthSales.reduce((sum, sale) => sum + sale.total, 0);
+    });
   }
 }
